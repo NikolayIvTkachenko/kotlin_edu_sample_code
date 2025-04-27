@@ -1,5 +1,6 @@
 package org.example
 
+import org.example.algoriyhms.ListNode
 import org.example.algoriyhms.Solutions
 import org.example.structures.linkedList.Node
 import org.example.structures.stack.isValidParentheses
@@ -10,7 +11,83 @@ fun main() {
     //program001()
     //program002()
     //program003()
-    program004()
+    //program004()
+    //program005()
+
+    //program006()
+    //program007()
+
+    //program008()
+    program009()
+}
+
+fun program009() {
+    //Input: l1 = [2,4,3], l2 = [5,6,4]
+    //Output: [7,0,8]
+    val solutions = Solutions()
+    var ln011 = ListNode(2)
+    var ln012 = ListNode(4)
+    var ln013 = ListNode(3)
+    ln011.next = ln012
+    ln012.next = ln013
+
+    var ln021 = ListNode(5)
+    var ln022 = ListNode(6)
+    var ln023 = ListNode(4)
+    ln021.next = ln022
+    ln022.next = ln023
+
+    var result = solutions.addTwoNumbers(ln011, ln021)
+    while (result != null) {
+        println(result.valueSample)
+        result = result.next
+    }
+//    do {
+//        println(result?.valueSample)
+//        result = result?.next
+//    } while (result?.next != null)
+}
+
+fun program008() {
+    val unsorted = intArrayOf(3, 1, 2, 4)
+
+    val sortedByRemainder = unsorted.sortedBy { it % 3 }
+    // the sorting is stable: the order of 1 (1 % 3 == 1) and 4 (4 % 3 == 1) was preserved
+    println(sortedByRemainder) // [3, 1, 4, 2]
+
+    val mapping = mapOf(1 to "one", 2 to "two", 3 to "three", 4 to "four")
+    val sortedByPronunciation = unsorted.sortedBy {
+        // take a key to sort by from the mapping
+        mapping.getOrDefault(it, "unknown")
+    }
+    // four < one < three < two, lexicographically
+    println(sortedByPronunciation) // [4, 1, 3, 2]
+
+    // the original array remains unchanged
+    println(unsorted.toList()) // [3, 1, 2, 4]
+}
+
+fun program007() {
+    val map = mapOf(Pair("abc", 1), Pair("c", 3), Pair("bd", 4), Pair("bc", 2))
+    val sorted = map.toSortedMap(compareBy<String> {it.length}.thenBy { it })
+    println(sorted.keys)
+}
+fun program006() {
+    val map = mapOf(Pair("c",3), Pair("b", 2), Pair("d", 1))
+    val sorted = map.toSortedMap()
+
+    println(sorted.keys)
+    println(sorted.values)
+}
+
+fun program005() {
+    val solutions = Solutions()
+    //val nums = intArrayOf(2, 7, 11, 15)
+    val nums = intArrayOf(3, 2, 3,3,6)
+    nums.forEach { item -> print("$item,") }
+    val answer = solutions.majorityElement(nums)
+    println()
+    println(answer)
 }
 
 fun program004() {
