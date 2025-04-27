@@ -1,13 +1,73 @@
 package org.example
 
 import org.example.algoriyhms.Solutions
+import org.example.structures.linkedList.Node
 import org.example.structures.stack.isValidParentheses
+import org.example.structures.tree.TreeNodeV0
 
 fun main() {
 
     //program001()
-    program002()
+    //program002()
+    //program003()
+    program004()
+}
 
+fun program004() {
+    val list = Node(1, Node(2, Node(4, Node(5))))
+    println(list)
+}
+
+fun program003() {
+
+    val tree = makeBeverageTree()
+    tree.forEachDepthFirst {
+        println(it.value)
+    }
+    println("====")
+    tree.forEachLevelOrder {
+        println(it.value)
+    }
+    tree.search("Chai")
+}
+
+fun makeBeverageTree(): TreeNodeV0<String> {
+    val tree = TreeNodeV0("Beverages")
+    val hot = TreeNodeV0("Hot")
+    val cold = TreeNodeV0("Cold")
+
+    val tea = TreeNodeV0("Tea")
+    val coffee = TreeNodeV0("Coffee")
+    val chocolate = TreeNodeV0("Chocolate")
+
+    val blackTea = TreeNodeV0("Black Tea")
+    val greenTea = TreeNodeV0("Green Tea")
+    val chainTea = TreeNodeV0("Chai")
+
+    val soda = TreeNodeV0("Soda")
+    val milk = TreeNodeV0("Milk")
+
+    val gingerAle = TreeNodeV0("Ginger Ale")
+    val bitterLemon = TreeNodeV0("Bitter Lemon")
+
+    tree.add(hot)
+    tree.add(cold)
+
+    hot.add(tea)
+    hot.add(coffee)
+    hot.add(chocolate)
+
+    cold.add(soda)
+    cold.add(milk)
+
+    tea.add(blackTea)
+    tea.add(greenTea)
+    tea.add(chainTea)
+
+    soda.add(gingerAle)
+    soda.add(bitterLemon)
+
+    return tree
 }
 
 fun program002() {
