@@ -32,5 +32,12 @@ fun program001() {
         print("${word[i]} ")
     }
     println()
+    println("===")
 
+    println(word.reversed())
+
+}
+
+public inline fun String.reversed(): String {
+    return (this as CharSequence).reversed().toString()
 }
