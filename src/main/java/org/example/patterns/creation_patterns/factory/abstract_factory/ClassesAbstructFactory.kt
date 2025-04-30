@@ -1,4 +1,4 @@
-package org.example.patterns.factory.abstract_factory
+package org.example.patterns.creation_patterns.factory.abstract_factory
 
 interface Building<in UnitType, out ProduceUnit> where UnitType: Enum<*>, ProduceUnit: Unit {
     fun build(type: UnitType): ProduceUnit

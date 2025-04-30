@@ -1,4 +1,4 @@
-package org.example.patterns.factory.simple
+package org.example.patterns.creation_patterns.factory.simple
 
 fun main() {
     val animalCat = animalFactory("cat");

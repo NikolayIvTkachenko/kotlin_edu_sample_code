@@ -1,4 +1,4 @@
-package org.example.patterns.factory.abstract_factory
+package org.example.patterns.creation_patterns.factory.abstract_factory
 
 fun main() {
     val hq = HQ()
