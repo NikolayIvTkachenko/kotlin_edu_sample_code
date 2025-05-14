@@ -125,7 +125,7 @@ fun threeDigitEventNumberV2(digits: IntArray): IntArray {
     }
     dfs(0, count, 0)
     return IntArray(result.size) {
-        result.get(it)
+        result[it]
     }
 }
 
