@@ -10,7 +10,24 @@ fun program100001() {
     println()
     //[1,2,4], list2 = [1,3,4]
     //ListNode
+    val l1001 = ListNode(1)
+    val l1002 = ListNode(2)
+    val l1003 = ListNode(4)
+    l1001.next = l1002
+    l1002.next = l1003
 
+    val l2001 = ListNode(1)
+    val l2002 = ListNode(3)
+    val l2003 = ListNode(4)
+    l2001.next = l2002
+    l2002.next = l2003
+
+    val result = mergeTwoSortedList(l1001, l2001)
+    var rCycler = result
+    while (rCycler != null) {
+        print(" ${rCycler.valueSample} => ")
+        rCycler = rCycler.next
+    }
 
 }
 
@@ -19,7 +36,7 @@ fun program100002() {
     println()
     //list1 = [], list2 = [0]
 
-
+    //mergeTwoSortedList
 }
 //You are given the heads of two sorted linked lists list1 and list2.
 //
