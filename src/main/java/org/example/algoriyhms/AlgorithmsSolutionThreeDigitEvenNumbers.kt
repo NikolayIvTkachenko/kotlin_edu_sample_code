@@ -116,7 +116,7 @@ fun threeDigitEventNumberV1(digits: IntArray): IntArray {
 }
 
 
-val result = ArrayList<Int>()
+var result = ArrayList<Int>()
 fun threeDigitEventNumberV2(digits: IntArray): IntArray {
 
     val count = IntArray(10)

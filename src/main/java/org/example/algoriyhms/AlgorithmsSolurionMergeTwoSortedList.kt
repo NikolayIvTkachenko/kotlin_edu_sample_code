@@ -75,22 +75,40 @@ fun program100002() {
  * }
  */
 
-fun mergeTwoSortedList(l1: ListNode?, l2: ListNode?): ListNode? {
-    var l1 = l1
-    var l2 = l2
-    val prehead = ListNode(-1)
-    var cur: ListNode? = prehead
+fun mergeTwoSortedList(list1: ListNode?, list2: ListNode?): ListNode? {
+    var l1 = list1
+    var l2 = list2
+    val startNewResult = ListNode(-101)
+    var result: ListNode? = startNewResult
     while (l1 != null && l2 != null) {
         if (l1.valueSample <= l2.valueSample) {
-            cur!!.next = l1
+            result?.next = l1
             l1 = l1.next
         } else {
-            cur!!.next = l2
+            result?.next = l2
             l2 = l2.next
         }
-        cur = cur.next
+        result = result?.next
     }
-    cur!!.next = l1 ?: l2
-    return prehead.next
+    result?.next = l1 ?: l2
+    return startNewResult.next
+}
 
+fun mergeTwoSortedListV2(l1: ListNode?, l2: ListNode?): ListNode? {
+    var list1 = l1
+    var list2 = l2
+    val result = ListNode(-1)
+    var currentNode: ListNode? = result
+    while (list1 != null && list2 != null) {
+        if (list1.valueSample <= list2.valueSample) {
+            currentNode!!.next = list1
+            list1 = list1.next
+        } else {
+            currentNode!!.next = list2
+            list2 = list2.next
+        }
+        currentNode = currentNode.next
+    }
+    currentNode!!.next = list1 ?: list2
+    return result.next
 }
