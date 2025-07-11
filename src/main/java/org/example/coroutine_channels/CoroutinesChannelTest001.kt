@@ -2,6 +2,8 @@ package org.example.coroutine_channels
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.produce
 import kotlin.random.Random
 
 data class Item(val number: Int)
@@ -30,9 +32,11 @@ fun main() = runBlocking {
     //testChannelCoroutine002()
     //testChannelCoroutine003()
     //testChannelCoroutine004()
-    testChannelCoroutine005()
+    //testChannelCoroutine005()
     //testChannelCoroutine006()
     //testChannelCoroutine007()
+
+    testChannelCoroutine008()
 
 }
 
@@ -103,18 +107,69 @@ suspend fun testChannelCoroutine005() {
     }
 
     println("Parent executing from ${Thread.currentThread().name}")
-
+    for (x in channel) {
+        println(x)
+        if (x == 1000_000) {
+            childJob.cancel()
+            break
+        }
+    }
     println("Done ==> ")
 }
 
 suspend fun testChannelCoroutine006() {
     val scope = CoroutineScope(Dispatchers.Default)
-    val channel = Channel<Int>(Channel.CONFLATED)
+    val channel = Channel<String>(Channel.CONFLATED)
+
+    val job = scope.launch {
+        channel.send("one")
+        channel.send("two")
+    }
+
+    job.join()
+
+    val elem = channel.receive()
+    println("Last value was:  $elem")
 
 }
 
 suspend fun testChannelCoroutine007() {
     val scope = CoroutineScope(Dispatchers.Default)
-    val channel = Channel<Int>(Channel.BUFFERED)
+    val channel = Channel<Int> (2) //Channel<Int>(Channel.BUFFERED)
+
+    val job1 = scope.launch {
+        for (i in 0..4) {
+            println("Send $i")
+            channel.send(i)
+        }
+    }
+
+    val job2 = scope.launch {
+        for (i in channel) {
+            println("Received $i")
+        }
+    }
+
+    job1.join()
+    job2.join()
 
 }
+
+fun CoroutineScope.produceValues(): ReceiveChannel<String> = produce {
+    send("one")
+    send("two")
+}
+
+suspend fun testChannelCoroutine008() {
+    val scope = CoroutineScope(Dispatchers.Default)
+    val receiveChannel = scope.produceValues()
+    for(e in receiveChannel) {
+        println(e)
+    }
+
+}
+
+//---------------->
+class ShapeData
+data class Location(val x: Int, val y: Int)
+data class Shape(val location: Location, val data: ShapeData)
