@@ -3,9 +3,17 @@ package org.example.threads_rxjava
 
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.*
+import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.Subject
+
 
 fun main() {
     programm01_rxjava()
+    programm02_rxjava()
+
+
+
+
 }
 
 fun programm01_rxjava() {
@@ -23,12 +31,16 @@ fun programm01_rxjava() {
              println("Done")
          }
      )
-
 }
 
+fun isEven(n: Int): Boolean = true
 
 fun programm02_rxjava() {
-   //var subject: Subject<int>
-
+   var subject: Subject<Int> = PublishSubject.create()
+    subject.map({isEven(it)}).subscribe { m ->
+        println("The number is ${(if (m) "Even" else "Odd")}")
+    }
+    subject.onNext(4)
+    subject.onNext(9)
 
 }
