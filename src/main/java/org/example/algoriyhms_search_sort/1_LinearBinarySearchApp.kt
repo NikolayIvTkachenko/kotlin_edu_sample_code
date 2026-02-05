@@ -11,7 +11,8 @@ fun programTimeTrackerLinearSearch() {
 
     // programLinearSearch001()
     // programLinearSearch002()
-    programLinearSearch003()
+    // programLinearSearch003()
+    programLinearSearch004()
 
 
     val stopTime = System.currentTimeMillis().toLong()
@@ -87,4 +88,28 @@ fun LeftBinarySearch(numbers: Array<Int>, key: Int): Int {
     }
     if (numbers[right] == key) return  right
     return  -1
+}
+
+fun programLinearSearch004() {
+    val numbers = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+    val key = 2
+    println("numbers = $numbers")
+    println("key = $key")
+    val result = RightBinarySearch(numbers, key)
+    println("result = $result")
+}
+
+fun RightBinarySearch(numbers: Array<Int>, key: Int): Int {
+    println("RightBinarySearch")
+    var left = 0
+    var right = numbers.size
+
+    while (left + 1 < right) {
+        val m = left + (right - left) / 2
+        if (numbers[m] <= key) left = m
+        else right = m
+    }
+
+    if (numbers[left] == key) return left
+    return -1
 }
